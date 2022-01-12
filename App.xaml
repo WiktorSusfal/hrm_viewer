@@ -1,0 +1,178 @@
+﻿<Application x:Class="HRM_Viewer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:HRM_Viewer"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <SolidColorBrush x:Key="DarkSienna" Color="#36151E"/>
+        <SolidColorBrush x:Key="EnglishViolet" Color="#593F62"/>
+        <SolidColorBrush x:Key="Rhythm" Color="#7B6D8D"/>
+        <SolidColorBrush x:Key="ShadowBlue" Color="#8499B1"/>
+        <SolidColorBrush x:Key="PaleCerulean" Color="#A5C4D4"/>
+
+        <!-- Styles -->
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <Grid>
+                            <Rectangle Fill="Transparent" Margin="3"/>
+                            <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Header" TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <Grid>
+                            <Rectangle Fill="{StaticResource DarkSienna}" Height="30"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ErrorBox" TargetType="TextBox">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+        </Style>
+
+        <!-- Fajna rzecz do wyświetlania tekstu błędu-->
+        <!-- Placeholder for the TextBox itself 
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <StackPanel>
+
+                
+                <AdornedElementPlaceholder />
+
+                <TextBlock Text="{Binding ErrorContent}"
+               Foreground="Red" />
+            </StackPanel>
+        </ControlTemplate>-->
+
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Validation.HasError" Value="True" />
+                        <Condition Property="IsVisible" Value="True" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="BorderBrush" Value="Red" />
+                    <Setter Property="BorderThickness" Value="1.5"/>
+                </MultiTrigger>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                    Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+
+
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Background" Value="{StaticResource EnglishViolet}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="MinWidth"  Value="50"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button" x:Name="button1CntrTemp">
+                        <Border
+                            Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" Name="defaultContent"
+                                    Margin="2"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="Opacity" Value="0.3"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource Rhythm}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Height" Value="23"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ImageButton">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="MinWidth"  Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button" x:Name="button1CntrTemp">
+                        <Border
+                            BorderThickness="0"
+                            Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" Name="defaultContent"
+                                    Margin="2"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.3"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource EnglishViolet}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{StaticResource Rhythm}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style TargetType="ComboBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+
+    </Application.Resources>
+</Application>

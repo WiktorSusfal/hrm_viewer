@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="HRM_Viewer.Views.TemplatesIDComboBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HRM_Viewer.Views"
+             xmlns:u="clr-namespace:HRM_Viewer.Utilities"
+             mc:Ignorable="d" 
+                      d:DesignHeight="30" d:DesignWidth="800">
+    <UserControl.Resources>
+        <u:KeyValuePairToStringConverter x:Key="PairToStringList"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Label 
+            x:Name="boxName"
+            Grid.Column="0"
+            Content="Selected Template"/>
+        <ComboBox
+            x:Name="BoxOfValues"
+            Grid.Column="1" 
+            ItemsSource="{Binding AvailableTemplates, FallbackValue=N/A, Mode=OneWay,  Converter={StaticResource PairToStringList}}"
+            IsReadOnly="False"
+            IsEditable="False"
+            SelectedItem="{Binding SelectedTemplate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</UserControl>
