@@ -23,6 +23,7 @@ namespace HRM_Viewer.ViewModels
         private readonly Dictionary<string, List<ValidationRule>> _mainSettingValRules;
         private readonly Dictionary<string, List<ValidationRule>> _optionalSettingValRules;
         private readonly Dictionary<string, List<ValidationRule>> _psswdRules;
+        private readonly Dictionary<string, List<ValidationRule>> _numRules;
 
         private Dictionary<string, string> _sqlCommands;
 
@@ -69,6 +70,8 @@ namespace HRM_Viewer.ViewModels
             _optionalSettingValRules.Add(nameof(PasswordObject.SettingValue), new List<ValidationRule>() { new MainOptionalSettingRule() });
             _psswdRules = new Dictionary<string, List<ValidationRule>>();
             _psswdRules.Add(nameof(PasswordObject.SettingValue), new List<ValidationRule>() { new NotEmptyPasswordRule() });
+            _numRules = new Dictionary<string, List<ValidationRule>> ();
+            _numRules.Add(nameof(PasswordObject.SettingValue), new List<ValidationRule>() { new MustBeNumberGTZeroRule() });
 
             MainSettings = new List<SettingObject>()
             {
@@ -76,7 +79,8 @@ namespace HRM_Viewer.ViewModels
                 new SettingObject("SQL Server Instance", string.Empty, _optionalSettingValRules),
                 new SettingObject("Username", string.Empty, _mainSettingValRules),
                 new PasswordObject("Password", string.Empty, new Dictionary<string, List<ValidationRule>>()),
-                new SettingObject("DatabaseName", string.Empty, _mainSettingValRules)
+                new SettingObject("DatabaseName", string.Empty, _mainSettingValRules),
+                new SettingObject("SQL Command Timeout", "90", _numRules)
             };
 
             MValidatedSettings = new List<SettingObject>()
@@ -85,7 +89,8 @@ namespace HRM_Viewer.ViewModels
                 new SettingObject("SQL Server Instance", string.Empty, _optionalSettingValRules),
                 new SettingObject("Username", string.Empty, _mainSettingValRules),
                 new PasswordObject("Password", string.Empty, new Dictionary<string, List<ValidationRule>>()),
-                new SettingObject("DatabaseName", string.Empty, _mainSettingValRules)
+                new SettingObject("DatabaseName", string.Empty, _mainSettingValRules),
+                new SettingObject("SQL Command Timeout", "90", _numRules)
             };
 
             ApplySettingsCmd = new RelayCommand(ref appEx, ApplySettings, ApplySettingsCanUse);
@@ -106,6 +111,9 @@ namespace HRM_Viewer.ViewModels
                 {
                     if (s1.SettingName.ToLower() == s2.SettingName.ToLower())
                         s1.SettingValue = s2.SettingValue;
+
+                    if (s2.SettingName == "SQL Command Timeout")
+                        _dsService.CmdTimeout = Int32.Parse(s2.SettingValue);
                 }
             }
 

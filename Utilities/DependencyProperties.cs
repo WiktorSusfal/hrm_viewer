@@ -33,6 +33,8 @@ namespace HRM_Viewer.Utilities
 
             if (webBrowser != null) 
                 webBrowser.NavigateToString(hcode);
+
+            
         }
     }
 }

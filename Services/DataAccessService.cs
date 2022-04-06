@@ -17,9 +17,16 @@ namespace HRM_Viewer.Services
 
         private string _connectionString;
         private string _connStrID;
+        private int _cmdTimeout;
 
         private ObservableCollection<KeyValuePair<string, string>> _availableTamplates;
         private string _selectedTemplate;
+
+        public int CmdTimeout
+        {
+            get { return _cmdTimeout; }
+            set { _cmdTimeout = value; }
+        }
 
         public string ConnectionString
         {
@@ -64,6 +71,7 @@ namespace HRM_Viewer.Services
         public DataAccessService(string connStrID)
         {
             _connectionString = string.Empty;
+            _cmdTimeout = 90;
 
             if (connStrID == null)
                 throw new NullReferenceException("connStrID");
@@ -82,7 +90,9 @@ namespace HRM_Viewer.Services
             using (SqlConnection sqlConn = new SqlConnection(this.ConnectionString))
             {
                 SqlCommand sCmd = new SqlCommand(query, sqlConn);
+                sCmd.CommandTimeout = CmdTimeout;
                 SqlDataAdapter sqlDA = new SqlDataAdapter(sCmd);
+            
                 sqlDA.Fill(resultSet);
 
                 sqlConn.Close();
@@ -99,6 +109,7 @@ namespace HRM_Viewer.Services
             using (SqlConnection sqlConn = new SqlConnection(this.ConnectionString))
             {
                 SqlCommand sCmd = new SqlCommand(query, sqlConn);
+                sCmd.CommandTimeout = CmdTimeout;
                 sqlConn.Open();
 
                 using (SqlDataReader sqlReader = sCmd.ExecuteReader(CommandBehavior.SchemaOnly))
