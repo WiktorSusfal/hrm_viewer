@@ -109,16 +109,18 @@
                                     <DataGridTextColumn Header="Name" Binding="{Binding htmlName}" Width="3*"/>
                                     <DataGridTextColumn Header="Datasource" Binding="{Binding fullDatasourceName}" Width="5*"/>
                                     <DataGridTextColumn Header="Type" Binding="{Binding datasourceType}" Width="2*"/>
-                                    <DataGridTextColumn Header="sPP" Binding="{Binding sParamPattern}" Width="2*"/>
-                                    <DataGridTextColumn Header="ePP" Binding="{Binding eParamPattern}" Width="2*"/>
-                                    <DataGridTextColumn Header="PrefID" Binding="{Binding preffixHtmlId}" Width="2*"/>
-                                    <DataGridTextColumn Header="SuffID" Binding="{Binding suffixHtmlId}" Width="2*"/>
-                                    <DataGridTextColumn Header="As1HTML" Binding="{Binding returnAsOneHtml}" Width="3*"/>
+                                    <DataGridTextColumn Header="sPP" Binding="{Binding sParamPattern}" Width="1.3*"/>
+                                    <DataGridTextColumn Header="ePP" Binding="{Binding eParamPattern}" Width="1.3*"/>
+                                    <DataGridTextColumn Header="PrefID" Binding="{Binding preffixHtmlId}" Width="1.5*"/>
+                                    <DataGridTextColumn Header="SuffID" Binding="{Binding suffixHtmlId}" Width="1.5*"/>
+                                    <DataGridTextColumn Header="As1html" Binding="{Binding returnAsOneHtml}" Width="1.6*"/>
                                     <DataGridTextColumn Header="OrderBy" Binding="{Binding orderByColumn}" Width="3*"/>
                                     <DataGridTextColumn Header="SplitBy" Binding="{Binding splitResultSetBy}" Width="3*"/>
                                     <DataGridTextColumn Header="SubjectCol" Binding="{Binding mSubjectColName}" Width="3*"/>
                                     <DataGridTextColumn Header="AddressCol" Binding="{Binding mAddressColName}" Width="3*"/>
-                                    <DataGridTextColumn Header="Out" Binding="{Binding outputMode}" Width="2*"/>
+                                    <DataGridTextColumn Header="Out" Binding="{Binding outputMode}" Width="1.2*"/>
+                                    <DataGridTextColumn Header="MailProf" Binding="{Binding mailProfile}" Width="2.5*"/>
+                                    <DataGridTextColumn Header="MergeOut" Binding="{Binding mergeOutHTMLs}" Width="2.5*" />
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Expander>
